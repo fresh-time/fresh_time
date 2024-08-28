@@ -98,7 +98,6 @@ public class AddRefFragment extends Fragment {
         // 성공 메시지 표시
         Toast.makeText(getContext(), "냉장고 이름이 저장되었습니다: " + fridgeName, Toast.LENGTH_LONG).show();
 
-        // HomeFragment로 이동
         navigateToHomeFragment();
     }
 

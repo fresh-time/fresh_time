@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ public class InputFragment extends Fragment {
     private static final String KEY_FRIDGE_NAMES = "FridgeNames"; // SharedPreferences 키
 
     private EditText inputName;
-    private EditText inputPeriod;
+    private TextView inputPeriod;
     private TextView inputQuantity;
     private Button btnDecrease;
     private Button btnIncrease;
@@ -163,7 +164,17 @@ public class InputFragment extends Fragment {
         String info = "이름: " + name + "\n개수: " + quantity + "\n유통기한: " + expirationDate + "\n냉장고: " + selectedFridgeName;
         Toast.makeText(getContext(), "재료가 저장되었습니다: \n" + info, Toast.LENGTH_LONG).show();
 
+        navigateToHomeFragment();
     }
+    private void navigateToHomeFragment() {
+        // HomeFragment로 이동하기 위한 FragmentTransaction 생성
+        Fragment homeFragment = new HomeFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
 
+        // HomeFragment를 화면에 표시
+        transaction.replace(R.id.fragment_container, homeFragment);
+        transaction.addToBackStack(null);  // 뒤로 가기 버튼으로 이전 Fragment로 돌아갈 수 있게 함
+        transaction.commit();
+    }
 
 }
