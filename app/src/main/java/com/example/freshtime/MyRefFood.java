@@ -1,9 +1,14 @@
 package com.example.freshtime;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.freshtime.domain.Food;
+import com.example.freshtime.domain.Refrigerator;
+import com.example.freshtime.repository.RefrigeratorRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +24,26 @@ public class MyRefFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myreffood);
 
+        // Get the data from the intent
+        Intent intent = getIntent();
+        String refName = intent.getStringExtra("refName");
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // 데이터 초기화
         foodItemList = new ArrayList<>();
-        foodItemList.add(new FoodItem("바나나", "/88.7kcal", "~ 24.08.27", R.drawable.banana));
-        foodItemList.add(new FoodItem("가지", "/52.0kcal", "~ 24.09.01", R.drawable.eggplant));
-        // 더 많은 아이템 추가 가능
+        Refrigerator refrigerator = RefrigeratorRepository.getRefrigeratorByName(refName);
+        if (refrigerator != null) {
+            for (Food food : refrigerator.getFoods()) {
+                foodItemList.add(new FoodItem(
+                        food.getName(),
+                        "/88.7kcal",
+                        food.getDate(),
+                        R.drawable.banana
+                ));
+            }
+        }
 
         // 어댑터 설정
         foodAdapter = new FoodAdapter(this, foodItemList);
