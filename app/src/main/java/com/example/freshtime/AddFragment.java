@@ -3,10 +3,12 @@ package com.example.freshtime;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 public class AddFragment extends Fragment {
 
@@ -44,7 +46,24 @@ public class AddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add, container, false);
+        View view = inflater.inflate(R.layout.fragment_add, container, false);
+
+        // 버튼 클릭 이벤트 처리
+        ImageButton btnNavigate = view.findViewById(R.id.add_food);
+        btnNavigate.setOnClickListener(v -> {
+            // 이동할 Fragment 생성
+            Fragment newFragment = new AddFoodFragment();  // NextFragment로 대체
+
+            // FragmentTransaction을 통해 Fragment 전환
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);  // 뒤로 가기 버튼으로 이전 Fragment로 돌아갈 수 있게 함
+            transaction.commit();
+        });
+
+        return view;
+
     }
 }

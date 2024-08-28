@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (itemId == R.id.menu_add) {
                 selectedFragment = new AddFragment();
             } else if (itemId == R.id.menu_setting) {
-                selectedFragment = new AddFoodFragment();
+                //selectedFragment = new AddFoodFragment();
             }
 
             if (selectedFragment != null) {
