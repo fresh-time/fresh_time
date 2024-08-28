@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+
+            <LinearLayout
+                android:id="@+id/mypage_back_profile"
+                android:layout_width="380dp"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/back_image"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/mypage_icon_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:adjustViewBounds="true"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="user profile photo"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_profile" />
+
+                <TextView
+                    android:id="@+id/mypage_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="Yeonwoo"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#000000"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/mypage_notification"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mypage_back_profile"
+                android:layout_alignStart="@id/mypage_back_profile"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bt_notification" />
+
+            <Switch
+                android:id="@+id/mypage_toggle"
+                android:layout_width="95dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:checked="false"
+                android:textOff=""
+                android:textOn=""
+                android:thumbTint="#8E97FD"
+                android:trackTint="#8E97FD"
+                />
+        </LinearLayout>
+
+        <!-- 토글 온 버튼(근데 오류나길래 위에만 있어도 될 거 같지만 일단 남겨놓기)
+        <ToggleButton
+            android:id="@+id/mypage_toggle_on"
+            android:layout_width="95dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/mypage_back_profile"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@id/mypage_notification"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@drawable/toggle_on"
+            android:checked="true"
+            android:textOn="" />-->
+
+        <ImageButton
+            android:id="@+id/mypage_profile"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mypage_notification"
+            android:layout_marginTop="20dp"
+            android:layout_alignStart="@id/mypage_back_profile"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="button to set up profile"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bt_profile" />
+
+        <View
+            android:layout_width="370dp"
+            android:layout_height="0.6dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="#A0A3B1" />
+
+        <ImageButton
+            android:id="@+id/mypage_term"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@id/mypage_back_profile"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="button about terms of use"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bt_use" />
+
+        <View
+            android:layout_width="370dp"
+            android:layout_height="0.6dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="#A0A3B1" />
+
+        <ImageButton
+            android:id="@+id/mypage_bt_credit"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@id/mypage_back_profile"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="button about credit"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bt_credit" />
+
+        <View
+            android:layout_width="370dp"
+            android:layout_height="0.6dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="#A0A3B1" />
+
+        <ImageButton
+            android:id="@+id/mypage_bt_logout"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@id/mypage_back_profile"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="button to do log out"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bt_logout" />
+        </LinearLayout>
+</FrameLayout>

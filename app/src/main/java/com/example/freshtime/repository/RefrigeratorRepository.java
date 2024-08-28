@@ -29,9 +29,8 @@ public class RefrigeratorRepository {
 
     public static List<String> getRefrigeratorName() {
         List<String> names = new ArrayList<>();
-        List<Refrigerator> values = (List<Refrigerator>) refrigerators.values();
-        for (int i = 0; i < refrigerators.size(); i++) {
-            names.add(values.get(i).getName());
+        for (Refrigerator refrigerator : refrigerators.values()) {
+            names.add(refrigerator.getName());
         }
         return names;
     }
