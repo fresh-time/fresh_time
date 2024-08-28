@@ -60,7 +60,8 @@
                 android:background="@drawable/input_background"
                 android:gravity="center"
                 android:inputType="number"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:maxLength="1"/>
 
             <!-- 두 번째 입력 칸 -->
             <EditText
@@ -72,7 +73,8 @@
                 android:background="@drawable/input_background"
                 android:gravity="center"
                 android:inputType="number"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:maxLength="1"/>
 
             <!-- 세 번째 입력 칸 -->
             <EditText
@@ -84,7 +86,8 @@
                 android:background="@drawable/input_background"
                 android:gravity="center"
                 android:inputType="number"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:maxLength="1"/>
 
             <!-- 네 번째 입력 칸 -->
             <EditText
@@ -95,7 +98,8 @@
                 android:background="@drawable/input_background"
                 android:gravity="center"
                 android:inputType="number"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:maxLength="1"/>
         </LinearLayout>
 
     </LinearLayout>

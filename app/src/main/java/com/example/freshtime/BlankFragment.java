@@ -1,12 +1,18 @@
 package com.example.freshtime;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +65,41 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+
+        // "다음" 버튼을 찾기
+        Button nextButton = view.findViewById(R.id.btn_next);
+
+        // 버튼 클릭 리스너 설정
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 커스텀 AlertDialog를 생성하여 알림 표시
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                View customView = inflater.inflate(R.layout.dialog_custom_alert, null);
+                builder.setView(customView);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                // 알림을 2초 후에 자동으로 닫고 HomeFragment로 이동
+                customView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+
+                        // HomeFragment로 전환
+                        Fragment homeFragment = new HomeFragment();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+                        fragmentTransaction.addToBackStack(null);  // 백스택에 추가하여 뒤로가기 버튼으로 돌아올 수 있게 함
+                        fragmentTransaction.commit();
+                    }
+                }, 2000); // 2초 후에 닫힘
+            }
+        });
+        return view;
     }
 }
