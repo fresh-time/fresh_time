@@ -28,6 +28,14 @@ public class Refrigerator {
         this.name = name;
     }
 
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
+    }
+
     // 냉장고에 음식 저장하기
     public void addFood(Food food) {
         foods.add(food);

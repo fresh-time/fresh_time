@@ -44,4 +44,8 @@ public class RefrigeratorRepository {
         }
         return false;
     }
+
+    public static List<Refrigerator> getAllRefrigerators() {
+        return new ArrayList<>(refrigerators.values());
+    }
 }
