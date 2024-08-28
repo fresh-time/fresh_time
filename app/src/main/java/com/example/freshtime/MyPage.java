@@ -1,4 +1,4 @@
 package com.example.freshtime;
 
-public class MyPage extends {
+public class MyPage {
 }
