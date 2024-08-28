@@ -3,6 +3,7 @@ package com.example.freshtime;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
@@ -61,6 +62,24 @@ public class AddFragment extends Fragment {
             transaction.replace(R.id.fragment_container, newFragment);
             transaction.addToBackStack(null);  // 뒤로 가기 버튼으로 이전 Fragment로 돌아갈 수 있게 함
             transaction.commit();
+        });
+
+        // "add_share" ImageButton을 찾기
+        ImageButton addShareButton = view.findViewById(R.id.add_share);
+
+        // 버튼 클릭 리스너 설정
+        addShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // BlankFragment로 전환
+                Fragment blankFragment = new BlankFragment();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.fragment_container, blankFragment);
+                fragmentTransaction.addToBackStack(null);  // 백스택에 추가하여 뒤로가기 버튼으로 돌아올 수 있게 함
+                fragmentTransaction.commit();
+            }
         });
 
         return view;
