@@ -22,7 +22,20 @@
                 android:text="Fresh Time!"
                 android:textSize="25dp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_1"/>
+
         </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>
