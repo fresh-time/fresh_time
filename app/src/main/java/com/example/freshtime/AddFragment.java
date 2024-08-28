@@ -82,6 +82,23 @@ public class AddFragment extends Fragment {
             }
         });
 
+        // "addRefButton" ImageButton을 찾기
+        ImageButton addRefButton = view.findViewById(R.id.add_ref);
+
+        // 버튼 클릭 리스너 설정
+        addRefButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment addRefFragment = new AddRefFragment();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.fragment_container, addRefFragment);
+                fragmentTransaction.addToBackStack(null);  // 백스택에 추가하여 뒤로가기 버튼으로 돌아올 수 있게 함
+                fragmentTransaction.commit();
+            }
+        });
+
         return view;
 
     }

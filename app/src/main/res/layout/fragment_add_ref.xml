@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddRefFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:text="냉장고 추가하기"
+            android:layout_marginBottom="50dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="냉장고 이름"
+            android:layout_marginBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/add_ref_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="예: 토마토"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- 저장 버튼 -->
+        <Button
+            android:id="@+id/btn_save_ref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="저장"
+            android:backgroundTint="@color/black"
+            android:layout_marginTop="24dp"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

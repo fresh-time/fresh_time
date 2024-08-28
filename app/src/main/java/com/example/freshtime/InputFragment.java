@@ -1,6 +1,8 @@
 package com.example.freshtime;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,8 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Set;
 
 public class InputFragment extends Fragment {
+    private static final String PREFS_NAME = "FridgePrefs"; // SharedPreferences 파일 이름
+    private static final String KEY_FRIDGE_NAMES = "FridgeNames"; // SharedPreferences 키
 
     private EditText inputName;
     private EditText inputPeriod;
@@ -25,7 +30,9 @@ public class InputFragment extends Fragment {
     private Button btnDecrease;
     private Button btnIncrease;
     private Button btnSaveIngredient;
+    Spinner fridgeSpinner;
     private int quantity = 1;  // 초기 개수
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -62,13 +69,11 @@ public class InputFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_input, container, false);
 
-        // 냉장고 목록 정의
-        String[] fridgeList = {"Main Fridge", "Small Fridge", "Garage Fridge"};
         // Spinner 설정
-        Spinner fridgeSpinner = view.findViewById(R.id.input_ref);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, fridgeList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fridgeSpinner.setAdapter(adapter);
+        fridgeSpinner = view.findViewById(R.id.input_ref);
+
+        // 냉장고 목록을 불러와서 Spinner에 설정
+        loadFridgeNames();
 
         // UI 요소 초기화
         inputName = view.findViewById(R.id.input_name);
@@ -86,6 +91,16 @@ public class InputFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+    private void loadFridgeNames() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        Set<String> fridgeNames = sharedPreferences.getStringSet(KEY_FRIDGE_NAMES, null);
+
+        if (fridgeNames != null) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, fridgeNames.toArray(new String[0]));
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            fridgeSpinner.setAdapter(adapter);
+        }
     }
 
     private void showDatePickerDialog() {
