@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.freshtime.domain.Refrigerator;
+import com.example.freshtime.repository.RefrigeratorRepository;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,9 +27,6 @@ public class AddRefFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
-
-    private static final String PREFS_NAME = "FridgePrefs"; // SharedPreferences 파일 이름
-    private static final String KEY_FRIDGE_NAMES = "FridgeNames"; // SharedPreferences 키
 
     private EditText addRefName;
     private Button btnSaveRef;
@@ -79,21 +79,18 @@ public class AddRefFragment extends Fragment {
             return;
         }
 
-        // SharedPreferences에서 저장된 냉장고 이름 목록 불러오기
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        Set<String> fridgeNames = sharedPreferences.getStringSet(KEY_FRIDGE_NAMES, new HashSet<>());
 
         // 중복 체크
-        if (fridgeNames.contains(fridgeName)) {
+        if (RefrigeratorRepository.checkNameDuplicate(fridgeName)) {
             Toast.makeText(getContext(), "이미 저장된 냉장고 이름입니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 
+
         // 냉장고 이름 저장
-        fridgeNames.add(fridgeName);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet(KEY_FRIDGE_NAMES, fridgeNames);
-        editor.apply(); // 비동기적으로 저장
+        Refrigerator newFridge = new Refrigerator(fridgeName);
+        RefrigeratorRepository.save(newFridge);
+
 
         // 저장 후 입력 필드 초기화
         addRefName.setText("");

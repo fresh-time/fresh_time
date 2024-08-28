@@ -1,12 +1,11 @@
 package com.example.freshtime;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Set;
+import java.util.List;
+
+import com.example.freshtime.domain.Food;
+import com.example.freshtime.domain.Refrigerator;
+import com.example.freshtime.repository.RefrigeratorRepository;
 
 public class InputFragment extends Fragment {
     private static final String PREFS_NAME = "FridgePrefs"; // SharedPreferences 파일 이름
@@ -93,11 +96,11 @@ public class InputFragment extends Fragment {
         return view;
     }
     private void loadFridgeNames() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        Set<String> fridgeNames = sharedPreferences.getStringSet(KEY_FRIDGE_NAMES, null);
-
-        if (fridgeNames != null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, fridgeNames.toArray(new String[0]));
+        List<String> fridgeNames = RefrigeratorRepository.getRefrigeratorName();
+        // 로그를 사용하여 냉장고 이름 목록을 출력
+        Log.d("InputFragment", "Fridge Names: " + fridgeNames.toString());
+        if (fridgeNames != null && !fridgeNames.isEmpty()) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, fridgeNames);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             fridgeSpinner.setAdapter(adapter);
         }
@@ -137,7 +140,7 @@ public class InputFragment extends Fragment {
     private void saveIngredientInfo() {
         String name = inputName.getText().toString().trim();
         String expirationDate = inputPeriod.getText().toString().trim();
-        String selectedFridge = ((Spinner) getView().findViewById(R.id.input_ref)).getSelectedItem().toString();
+        String selectedFridgeName = fridgeSpinner.getSelectedItem().toString();
 
         // 간단한 유효성 검사
         if (name.isEmpty() || expirationDate.isEmpty()) {
@@ -145,10 +148,21 @@ public class InputFragment extends Fragment {
             return;
         }
 
-        // 입력된 정보를 처리 (예: 데이터베이스 저장, 다음 화면으로 이동 등)
-        // 이 예제에서는 토스트 메시지로 입력된 정보를 표시함
-        String info = "이름: " + name + "\n개수: " + quantity + "\n유통기한: " + expirationDate + "\n냉장고: " + selectedFridge;
-        Toast.makeText(getContext(), info, Toast.LENGTH_LONG).show();
+        // 선택한 냉장고 이름으로 Refrigerator 객체 가져오기
+        Refrigerator selectedFridge = RefrigeratorRepository.getRefrigeratorByName(selectedFridgeName);
+        if (selectedFridge == null) {
+            Toast.makeText(getContext(), "선택한 냉장고가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Food 객체 생성 및 냉장고에 추가
+        Food newFood = new Food(name, expirationDate, quantity);
+        selectedFridge.addFood(newFood);
+
+        // 성공 메시지 표시
+        String info = "이름: " + name + "\n개수: " + quantity + "\n유통기한: " + expirationDate + "\n냉장고: " + selectedFridgeName;
+        Toast.makeText(getContext(), "재료가 저장되었습니다: \n" + info, Toast.LENGTH_LONG).show();
+
     }
 
 
