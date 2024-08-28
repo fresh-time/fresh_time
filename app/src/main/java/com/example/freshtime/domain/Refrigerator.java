@@ -28,8 +28,8 @@ public class Refrigerator {
         this.name = name;
     }
 
-    public void addFood(Food food){
+    // 냉장고에 음식 저장하기
+    public void addFood(Food food) {
         foods.add(food);
     }
 }
-    
