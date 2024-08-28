@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp">
+
+    <RelativeLayout
+        android:id="@+id/ref_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_bg"
+        tools:ignore="MissingConstraints">
+
+<!--        음식 사진-->
+        <ImageView
+            android:id="@+id/food_img"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/banana"
+            android:layout_margin="10dp" />
+
+<!--        음식 이름-->
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/food_img"
+            android:text="바나나"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textSize="21dp" />
+
+<!--        음식 칼로리 textview-->
+        <TextView
+            android:id="@+id/food_kcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/food_name"
+            android:layout_marginLeft="7dp"
+            android:text="/88.7kcal"
+            android:textSize="11dp"
+            android:layout_marginTop="24dp"
+            android:textColor="#8c8c8c"/>
+
+<!--        유통기한 textview-->
+        <TextView
+            android:id="@+id/food_exdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/food_name"
+            android:layout_toRightOf="@+id/food_img"
+            android:text="~ 24.08.27"
+            android:textSize="14dp"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
